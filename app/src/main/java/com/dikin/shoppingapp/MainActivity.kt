@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -20,10 +22,17 @@ class MainActivity : ComponentActivity() {
         setContent {
             ShoppingAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "World!",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Column(modifier = Modifier.padding(innerPadding)) {
+                        Greeting(
+                            name = "World!",
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        )
+                        Sum(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        )
+                    }
                 }
             }
         }
@@ -34,6 +43,20 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Composable
+fun Sum(modifier: Modifier = Modifier) {
+    val add: (Int, Int) -> Int = { a, b -> a + b }
+    val sum = add(10, 33)
+
+    val square: (Int) -> Int = {it * it}
+    val squareOfInt = square(5)
+
+    Text(
+        text = "Sum of integers: $sum\nSquare of 5: $squareOfInt",
         modifier = modifier
     )
 }
