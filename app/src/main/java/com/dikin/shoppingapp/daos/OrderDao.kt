@@ -24,4 +24,7 @@ interface OrderDao {
 
     @Delete
     suspend fun delete(order: Order)
+
+    @Query("delete from orders where orderId = :id")
+    suspend fun deleteById(id: Int)
 }

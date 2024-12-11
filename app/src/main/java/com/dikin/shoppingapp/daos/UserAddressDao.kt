@@ -25,4 +25,7 @@ interface UserAddressDao {
 
     @Delete
     suspend fun delete(userAddress: UserAddress)
+
+    @Query("delete from user_addresses where addressId = :id")
+    suspend fun deleteById(id: Int)
 }

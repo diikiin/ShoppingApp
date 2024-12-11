@@ -25,4 +25,7 @@ interface OrderItemDao {
 
     @Delete
     suspend fun delete(orderItem: OrderItem)
+
+    @Query("delete from order_items where orderItemId = :id")
+    suspend fun deleteById(id: Int)
 }

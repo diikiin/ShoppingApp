@@ -25,4 +25,7 @@ interface ReviewDao {
 
     @Delete
     suspend fun delete(review: Review)
+
+    @Query("delete from reviews where reviewId = :id")
+    suspend fun deleteById(id: Int)
 }
