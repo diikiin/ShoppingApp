@@ -2,6 +2,7 @@ package com.dikin.shoppingapp.repositories
 
 import com.dikin.shoppingapp.daos.CartItemDao
 import com.dikin.shoppingapp.entities.CartItem
+import com.dikin.shoppingapp.models.CartItemWithProduct
 import kotlinx.coroutines.flow.Flow
 
 class CartItemRepository(private val dao: CartItemDao) {
@@ -9,6 +10,10 @@ class CartItemRepository(private val dao: CartItemDao) {
 
     suspend fun getById(id: Int): CartItem? {
         return dao.getById(id)
+    }
+
+    suspend fun getByCartId(cartId: Int): Flow<List<CartItemWithProduct>> {
+        return dao.getByCartId(cartId)
     }
 
     suspend fun create(cartItem: CartItem) {

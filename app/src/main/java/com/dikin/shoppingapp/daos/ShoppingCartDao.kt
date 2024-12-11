@@ -17,6 +17,9 @@ interface ShoppingCartDao {
     @Query("select * from shopping_cart where cartId = :id")
     suspend fun getById(id: Int): ShoppingCart?
 
+    @Query("select * from shopping_cart where userId = :userId")
+    suspend fun getByUserId(userId: Int): ShoppingCart?
+
     @Insert
     suspend fun insert(shoppingCart: ShoppingCart)
 
@@ -25,7 +28,6 @@ interface ShoppingCartDao {
 
     @Delete
     suspend fun delete(shoppingCart: ShoppingCart)
-
     @Query("delete from shopping_cart where cartId = :id")
     suspend fun deleteById(id: Int)
 }

@@ -25,6 +25,10 @@ class ShoppingCartViewModel(application: Application): AndroidViewModel(applicat
         callback(repository.getById(id))
     }
 
+    fun getByUserId(userId: Int, callback: (ShoppingCart?) -> Unit) = viewModelScope.launch {
+        callback(repository.getByUserId(userId))
+    }
+
     fun create(shoppingCart: ShoppingCart) = viewModelScope.launch {
         repository.create(shoppingCart)
     }

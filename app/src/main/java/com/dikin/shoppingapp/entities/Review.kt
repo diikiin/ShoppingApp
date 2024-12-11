@@ -22,7 +22,8 @@ import androidx.room.PrimaryKey
     ]
 )
 data class Review(
-    @PrimaryKey(autoGenerate = true) val reviewId: Int = 0,
+    @PrimaryKey(autoGenerate = true)
+    val reviewId: Int = 0,
     val userId: Int,
     val productId: Int,
     val rating: Int,

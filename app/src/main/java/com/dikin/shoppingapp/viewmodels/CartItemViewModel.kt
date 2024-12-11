@@ -7,6 +7,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dikin.shoppingapp.config.AppDatabase
 import com.dikin.shoppingapp.entities.CartItem
+import com.dikin.shoppingapp.models.CartItemWithProduct
 import com.dikin.shoppingapp.repositories.CartItemRepository
 import kotlinx.coroutines.launch
 
@@ -23,6 +24,10 @@ class CartItemViewModel(application: Application) : AndroidViewModel(application
 
     fun getById(id: Int, callback: (CartItem?) -> Unit) = viewModelScope.launch {
         callback(repository.getById(id))
+    }
+
+    fun getByCartId(cartId: Int, callback: (LiveData<List<CartItemWithProduct>>) -> Unit) = viewModelScope.launch  {
+        callback(repository.getByCartId(cartId).asLiveData())
     }
 
     fun create(cartItem: CartItem) = viewModelScope.launch {
