@@ -27,7 +27,7 @@ interface CartItemDao {
         where ci.cartId = :cartId
     """
     )
-    suspend fun getByCartId(cartId: Int): Flow<List<CartItemWithProduct>>
+    fun getByCartId(cartId: Int): Flow<List<CartItemWithProduct>>
 
     @Insert
     suspend fun insert(cartItem: CartItem)

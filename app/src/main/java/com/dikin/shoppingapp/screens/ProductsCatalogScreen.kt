@@ -55,37 +55,37 @@ fun ProductsCatalogScreen(
         }
         Spacer(modifier = Modifier.height(8.dp))
 
-        LazyColumn {
-            items(tasks) { task ->
-                TaskItem(
-                    task = task,
-                    onDone = {
-                        taskViewModel.update(Task(task.id, task.title, task.description, true))
-                    },
-                    onUpdate = {
-                        selected = it
-                        showDialog = true
-                    },
-                    onDelete = {
-                        taskViewModel.delete(it)
-                    }
-                )
-            }
-        }
-    }
-
-    if (showDialog) {
-        AddOrUpdateTaskDialog(
-            task = selected,
-            onCreate = { task ->
-                taskViewModel.create(task)
-                showDialog = false
-            },
-            onUpdate = { task ->
-                taskViewModel.update(task)
-                showDialog = false
-            },
-            onDismiss = { showDialog = false }
-        )
+//        LazyColumn {
+//            items(tasks) { task ->
+//                TaskItem(
+//                    task = task,
+//                    onDone = {
+//                        taskViewModel.update(Task(task.id, task.title, task.description, true))
+//                    },
+//                    onUpdate = {
+//                        selected = it
+//                        showDialog = true
+//                    },
+//                    onDelete = {
+//                        taskViewModel.delete(it)
+//                    }
+//                )
+//            }
+//        }
+//    }
+//
+//    if (showDialog) {
+//        AddOrUpdateTaskDialog(
+//            task = selected,
+//            onCreate = { task ->
+//                taskViewModel.create(task)
+//                showDialog = false
+//            },
+//            onUpdate = { task ->
+//                taskViewModel.update(task)
+//                showDialog = false
+//            },
+//            onDismiss = { showDialog = false }
+//        )
     }
 }

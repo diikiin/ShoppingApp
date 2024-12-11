@@ -21,6 +21,5 @@ import java.util.Date
 data class ShoppingCart(
     @PrimaryKey
     val cartId: Int = 0,
-    val userId: Int,
-    val createdAt: Date = Timestamp.from(Instant.now())
+    val userId: Int
 )

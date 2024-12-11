@@ -26,8 +26,8 @@ class CartItemViewModel(application: Application) : AndroidViewModel(application
         callback(repository.getById(id))
     }
 
-    fun getByCartId(cartId: Int, callback: (LiveData<List<CartItemWithProduct>>) -> Unit) = viewModelScope.launch  {
-        callback(repository.getByCartId(cartId).asLiveData())
+    fun getByCartId(cartId: Int): LiveData<List<CartItemWithProduct>> {
+        return repository.getByCartId(cartId).asLiveData()
     }
 
     fun create(cartItem: CartItem) = viewModelScope.launch {

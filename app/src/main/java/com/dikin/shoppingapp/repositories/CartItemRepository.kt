@@ -12,7 +12,7 @@ class CartItemRepository(private val dao: CartItemDao) {
         return dao.getById(id)
     }
 
-    suspend fun getByCartId(cartId: Int): Flow<List<CartItemWithProduct>> {
+    fun getByCartId(cartId: Int): Flow<List<CartItemWithProduct>> {
         return dao.getByCartId(cartId)
     }
 

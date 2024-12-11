@@ -41,14 +41,11 @@ fun ShoppingCartScreen(
         }
     }
 
-    var cartItems: LiveData<List<CartItemWithProduct>>? = null
-    cartItemViewModel.getByCartId(shoppingCart!!.cartId) { result ->
-        cartItems = result
-    }
+    var cartItems = cartItemViewModel.getByCartId(shoppingCart!!.cartId)
 
     Column(modifier = Modifier.fillMaxSize()) {
         LazyColumn(modifier = Modifier.weight(1f)) {
-            items(cartItems?.value ?: emptyList()) { cartItem ->
+            items(cartItems.value ?: emptyList()) { cartItem ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
