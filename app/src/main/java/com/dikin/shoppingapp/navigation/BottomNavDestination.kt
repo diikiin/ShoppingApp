@@ -1,4 +1,4 @@
-package com.dikin.shoppingapp.screens
+package com.dikin.shoppingapp.navigation
 
 import com.dikin.shoppingapp.R
 

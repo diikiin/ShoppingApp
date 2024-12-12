@@ -14,6 +14,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: UserRepository
     val all: LiveData<List<User>>
+    var currentUser: User? = null
 
     init {
         val dao = AppDatabase.getDatabase(application).userDao()
@@ -23,6 +24,10 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getById(id: Int, callback: (User?) -> Unit) = viewModelScope.launch {
         callback(repository.getById(id))
+    }
+
+    fun getByUsername(username: String): User? {
+        return repository.getByUsername(username)
     }
 
     fun create(user: User) = viewModelScope.launch {

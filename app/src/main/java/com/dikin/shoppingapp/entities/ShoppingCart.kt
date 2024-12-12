@@ -3,9 +3,6 @@ package com.dikin.shoppingapp.entities
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import java.sql.Timestamp
-import java.time.Instant
-import java.util.Date
 
 @Entity(
     tableName = "shopping_cart",
@@ -19,7 +16,7 @@ import java.util.Date
     ]
 )
 data class ShoppingCart(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val cartId: Int = 0,
     val userId: Int
 )

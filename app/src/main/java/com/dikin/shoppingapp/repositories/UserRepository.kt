@@ -11,6 +11,10 @@ class UserRepository(private val dao: UserDao) {
         return dao.getById(id)
     }
 
+    fun getByUsername(username: String): User? {
+        return dao.getByUsername(username)
+    }
+
     suspend fun create(user: User) {
         dao.insert(user)
     }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,9 +21,11 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dikin.shoppingapp.entities.Product
 import com.dikin.shoppingapp.viewmodels.ProductViewModel
+import com.dikin.shoppingapp.viewmodels.UserViewModel
 
 @Composable
 fun ProductsCatalogScreen(
+    userViewModel: UserViewModel,
     productViewModel: ProductViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
@@ -51,7 +52,7 @@ fun ProductsCatalogScreen(
             },
             modifier = Modifier.align(Alignment.CenterHorizontally)
         ) {
-            Text("Add Task")
+            Text("Add Product")
         }
         Spacer(modifier = Modifier.height(8.dp))
 

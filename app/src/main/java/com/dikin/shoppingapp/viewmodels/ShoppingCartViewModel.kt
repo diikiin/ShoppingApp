@@ -29,7 +29,7 @@ class ShoppingCartViewModel(application: Application): AndroidViewModel(applicat
         callback(repository.getByUserId(userId))
     }
 
-    fun create(shoppingCart: ShoppingCart) = viewModelScope.launch {
+    fun create(shoppingCart: ShoppingCart) {
         repository.create(shoppingCart)
     }
 

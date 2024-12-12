@@ -15,7 +15,7 @@ class ShoppingCartRepository(private val dao: ShoppingCartDao) {
         return dao.getByUserId(userId);
     }
 
-    suspend fun create(shoppingCart: ShoppingCart) {
+    fun create(shoppingCart: ShoppingCart) {
         dao.insert(shoppingCart)
     }
 

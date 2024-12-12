@@ -10,10 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.dikin.shoppingapp.entities.User
+import com.dikin.shoppingapp.viewmodels.UserViewModel
 
 @Composable
-fun UserProfileScreen(user: User) {
+fun UserProfileScreen(userViewModel: UserViewModel) {
+    val user = userViewModel.currentUser!!
     Column(
         modifier = Modifier
             .fillMaxSize()

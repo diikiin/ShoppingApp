@@ -21,7 +21,7 @@ interface ShoppingCartDao {
     suspend fun getByUserId(userId: Int): ShoppingCart?
 
     @Insert
-    suspend fun insert(shoppingCart: ShoppingCart)
+    fun insert(shoppingCart: ShoppingCart)
 
     @Update
     suspend fun update(shoppingCart: ShoppingCart)

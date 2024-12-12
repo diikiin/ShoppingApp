@@ -16,36 +16,43 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dikin.shoppingapp.entities.ShoppingCart
 import com.dikin.shoppingapp.models.CartItemWithProduct
 import com.dikin.shoppingapp.viewmodels.CartItemViewModel
 import com.dikin.shoppingapp.viewmodels.ShoppingCartViewModel
+import com.dikin.shoppingapp.viewmodels.UserViewModel
 
 @Composable
 fun ShoppingCartScreen(
-    userId: Int,
+    userViewModel: UserViewModel,
     shoppingCartViewModel: ShoppingCartViewModel = viewModel(),
     cartItemViewModel: CartItemViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
+    val user = userViewModel.currentUser!!
     var shoppingCart: ShoppingCart? = null
-    shoppingCartViewModel.getByUserId(userId) { result ->
+    shoppingCartViewModel.getByUserId(user.userId) { result ->
         shoppingCart = result
     }
     if (shoppingCart == null) {
-        shoppingCartViewModel.create(ShoppingCart(userId = userId))
-        shoppingCartViewModel.getByUserId(userId) { result ->
+        shoppingCartViewModel.create(ShoppingCart(userId = user.userId))
+        shoppingCartViewModel.getByUserId(user.userId) { result ->
             shoppingCart = result
         }
     }
 
-    var cartItems = cartItemViewModel.getByCartId(shoppingCart!!.cartId)
+    var cartItems: List<CartItemWithProduct>? = emptyList()
+    if (shoppingCart != null) {
+        cartItems = cartItemViewModel.getByCartId(shoppingCart!!.cartId).value
+    }
 
     Column(modifier = Modifier.fillMaxSize()) {
+        if (cartItems.isNullOrEmpty()) {
+            Text("Your Cart is Empty!")
+        }
         LazyColumn(modifier = Modifier.weight(1f)) {
-            items(cartItems.value ?: emptyList()) { cartItem ->
+            items(cartItems ?: emptyList()) { cartItem ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
