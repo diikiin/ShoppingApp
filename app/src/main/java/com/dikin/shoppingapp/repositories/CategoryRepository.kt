@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class CategoryRepository(private val dao: CategoryDao) {
     val all: Flow<List<Category>> = dao.getAll()
 
-    suspend fun getById(id: Int): Category? {
+    suspend fun getById(id: Long): Category? {
         return dao.getById(id)
     }
 
@@ -23,7 +23,7 @@ class CategoryRepository(private val dao: CategoryDao) {
         dao.delete(category)
     }
 
-    suspend fun deleteById(id: Int) {
+    suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
 }

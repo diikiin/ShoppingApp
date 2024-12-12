@@ -21,7 +21,7 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
         all = repository.all.asLiveData()
     }
 
-    fun getById(id: Int, callback: (Category?) -> Unit) = viewModelScope.launch {
+    fun getById(id: Long, callback: (Category?) -> Unit) = viewModelScope.launch {
         callback(repository.getById(id))
     }
 
@@ -37,7 +37,7 @@ class CategoryViewModel(application: Application) : AndroidViewModel(application
         repository.delete(category)
     }
 
-    fun deleteById(id: Int) = viewModelScope.launch {
+    fun deleteById(id: Long) = viewModelScope.launch {
         repository.deleteById(id)
     }
 }

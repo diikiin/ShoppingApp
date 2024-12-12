@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class UserRepository(private val dao: UserDao) {
     val all: Flow<List<User>> = dao.getAll()
 
-    suspend fun getById(id: Int): User? {
+    suspend fun getById(id: Long): User? {
         return dao.getById(id)
     }
 
@@ -15,8 +15,8 @@ class UserRepository(private val dao: UserDao) {
         return dao.getByUsername(username)
     }
 
-    suspend fun create(user: User) {
-        dao.insert(user)
+    fun create(user: User): Long {
+        return dao.insert(user)
     }
 
     suspend fun update(user: User) {
@@ -27,7 +27,7 @@ class UserRepository(private val dao: UserDao) {
         dao.delete(user)
     }
 
-    suspend fun deleteById(id: Int) {
+    suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
 }

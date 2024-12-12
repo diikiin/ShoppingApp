@@ -2,12 +2,13 @@ package com.dikin.shoppingapp.repositories
 
 import com.dikin.shoppingapp.daos.ProductDao
 import com.dikin.shoppingapp.entities.Product
+import com.dikin.shoppingapp.models.ProductWithCategory
 import kotlinx.coroutines.flow.Flow
 
 class ProductRepository(private val dao: ProductDao) {
-    val all: Flow<List<Product>> = dao.getAll()
+    val all: Flow<List<ProductWithCategory>> = dao.getAll()
 
-    suspend fun getById(id: Int): Product? {
+    fun getById(id: Long): ProductWithCategory? {
         return dao.getById(id)
     }
 
@@ -23,7 +24,7 @@ class ProductRepository(private val dao: ProductDao) {
         dao.delete(product)
     }
 
-    suspend fun deleteById(id: Int) {
+    suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
 }

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class ReviewRepository(private val dao: ReviewDao) {
     val all: Flow<List<Review>> = dao.getAll()
 
-    suspend fun getById(id: Int): Review? {
+    suspend fun getById(id: Long): Review? {
         return dao.getById(id)
     }
 
@@ -23,7 +23,7 @@ class ReviewRepository(private val dao: ReviewDao) {
         dao.delete(review)
     }
 
-    suspend fun deleteById(id: Int) {
+    suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
 }

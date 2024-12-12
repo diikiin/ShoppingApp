@@ -15,10 +15,10 @@ interface ShoppingCartDao {
     fun getAll(): Flow<List<ShoppingCart>>
 
     @Query("select * from shopping_cart where cartId = :id")
-    suspend fun getById(id: Int): ShoppingCart?
+    suspend fun getById(id: Long): ShoppingCart?
 
     @Query("select * from shopping_cart where userId = :userId")
-    suspend fun getByUserId(userId: Int): ShoppingCart?
+    suspend fun getByUserId(userId: Long): ShoppingCart?
 
     @Insert
     fun insert(shoppingCart: ShoppingCart)
@@ -29,5 +29,5 @@ interface ShoppingCartDao {
     @Delete
     suspend fun delete(shoppingCart: ShoppingCart)
     @Query("delete from shopping_cart where cartId = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.Flow
 class CartItemRepository(private val dao: CartItemDao) {
     val all: Flow<List<CartItem>> = dao.getAll()
 
-    suspend fun getById(id: Int): CartItem? {
+    suspend fun getById(id: Long): CartItem? {
         return dao.getById(id)
     }
 
-    fun getByCartId(cartId: Int): Flow<List<CartItemWithProduct>> {
+    fun getByCartId(cartId: Long): Flow<List<CartItemWithProduct>> {
         return dao.getByCartId(cartId)
     }
 
@@ -28,7 +28,7 @@ class CartItemRepository(private val dao: CartItemDao) {
         dao.delete(cartItem)
     }
 
-    suspend fun deleteById(id: Int) {
+    suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
 }

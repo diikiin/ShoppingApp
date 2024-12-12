@@ -7,13 +7,14 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dikin.shoppingapp.config.AppDatabase
 import com.dikin.shoppingapp.entities.Product
+import com.dikin.shoppingapp.models.ProductWithCategory
 import com.dikin.shoppingapp.repositories.ProductRepository
 import kotlinx.coroutines.launch
 
 class ProductViewModel(application: Application): AndroidViewModel(application) {
 
     private val repository: ProductRepository
-    val all: LiveData<List<Product>>
+    val all: LiveData<List<ProductWithCategory>>
 
     init {
         val dao = AppDatabase.getDatabase(application).productDao()
@@ -21,8 +22,8 @@ class ProductViewModel(application: Application): AndroidViewModel(application) 
         all = repository.all.asLiveData()
     }
 
-    fun getById(id: Int, callback: (Product?) -> Unit) = viewModelScope.launch {
-        callback(repository.getById(id))
+    fun getById(id: Long): ProductWithCategory? {
+        return repository.getById(id)
     }
 
     fun create(product: Product) = viewModelScope.launch {
@@ -37,7 +38,7 @@ class ProductViewModel(application: Application): AndroidViewModel(application) 
         repository.delete(product)
     }
 
-    fun deleteById(id: Int) = viewModelScope.launch {
+    fun deleteById(id: Long) = viewModelScope.launch {
         repository.deleteById(id)
     }
 }

@@ -17,7 +17,6 @@ import com.dikin.shoppingapp.viewmodels.UserViewModel
 fun MainScreen() {
     val navController = rememberNavController()
     val userViewModel: UserViewModel = viewModel()
-    val shoppingCartViewModel: ShoppingCartViewModel = viewModel()
 
     var currentUser = userViewModel.getByUsername("amigo")
     if (currentUser == null) {
@@ -29,7 +28,6 @@ fun MainScreen() {
             )
         )
         currentUser = userViewModel.getByUsername("amigo")
-        currentUser?.let { shoppingCartViewModel.create(ShoppingCart(userId = it.userId)) }
     }
     userViewModel.currentUser = currentUser
 

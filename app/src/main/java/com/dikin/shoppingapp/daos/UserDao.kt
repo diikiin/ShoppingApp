@@ -15,13 +15,13 @@ interface UserDao {
     fun getAll(): Flow<List<User>>
 
     @Query("select * from users where userId = :id")
-    suspend fun getById(id: Int): User?
+    suspend fun getById(id: Long): User?
 
     @Query("select * from users where username = :username")
     fun getByUsername(username: String): User?
 
     @Insert
-    suspend fun insert(user: User)
+    fun insert(user: User): Long
 
     @Update
     suspend fun update(user: User)
@@ -30,5 +30,5 @@ interface UserDao {
     suspend fun delete(user: User)
 
     @Query("delete from users where userId = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class UserAddressRepository(private val dao: UserAddressDao) {
     val all: Flow<List<UserAddress>> = dao.getAll()
 
-    suspend fun getById(id: Int): UserAddress? {
+    suspend fun getById(id: Long): UserAddress? {
         return dao.getById(id)
     }
 
@@ -23,7 +23,7 @@ class UserAddressRepository(private val dao: UserAddressDao) {
         dao.delete(userAddress)
     }
 
-    suspend fun deleteById(id: Int) {
+    suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
 }

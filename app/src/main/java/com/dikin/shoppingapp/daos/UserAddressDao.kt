@@ -15,7 +15,7 @@ interface UserAddressDao {
     fun getAll(): Flow<List<UserAddress>>
 
     @Query("select * from user_addresses where addressId = :id")
-    suspend fun getById(id: Int): UserAddress?
+    suspend fun getById(id: Long): UserAddress?
 
     @Insert
     suspend fun insert(userAddress: UserAddress)
@@ -27,5 +27,5 @@ interface UserAddressDao {
     suspend fun delete(userAddress: UserAddress)
 
     @Query("delete from user_addresses where addressId = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

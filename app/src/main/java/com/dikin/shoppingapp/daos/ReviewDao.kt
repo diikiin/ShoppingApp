@@ -15,7 +15,7 @@ interface ReviewDao {
     fun getAll(): Flow<List<Review>>
 
     @Query("select * from reviews where reviewId = :id")
-    suspend fun getById(id: Int): Review?
+    suspend fun getById(id: Long): Review?
 
     @Insert
     suspend fun insert(review: Review)
@@ -27,5 +27,5 @@ interface ReviewDao {
     suspend fun delete(review: Review)
 
     @Query("delete from reviews where reviewId = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

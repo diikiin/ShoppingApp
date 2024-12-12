@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class OrderRepository(private val dao: OrderDao) {
     val all: Flow<List<Order>> = dao.getAll()
 
-    suspend fun getById(id: Int): Order? {
+    suspend fun getById(id: Long): Order? {
         return dao.getById(id)
     }
 
@@ -23,7 +23,7 @@ class OrderRepository(private val dao: OrderDao) {
         dao.delete(order)
     }
 
-    suspend fun deleteById(id: Int) {
+    suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
 }

@@ -37,7 +37,7 @@ import com.dikin.shoppingapp.entities.UserAddress
         ShoppingCart::class,
         User::class,
         UserAddress::class
-    ], version = 2, exportSchema = false
+    ], version = 3, exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun cartItemDao(): CartItemDao

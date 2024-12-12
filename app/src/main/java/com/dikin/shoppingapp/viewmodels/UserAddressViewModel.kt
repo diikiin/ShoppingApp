@@ -21,7 +21,7 @@ class UserAddressViewModel(application: Application): AndroidViewModel(applicati
         all = repository.all.asLiveData()
     }
 
-    fun getById(id: Int, callback: (UserAddress?) -> Unit) = viewModelScope.launch {
+    fun getById(id: Long, callback: (UserAddress?) -> Unit) = viewModelScope.launch {
         callback(repository.getById(id))
     }
 
@@ -37,7 +37,7 @@ class UserAddressViewModel(application: Application): AndroidViewModel(applicati
         repository.delete(userAddress)
     }
 
-    fun deleteById(id: Int) = viewModelScope.launch {
+    fun deleteById(id: Long) = viewModelScope.launch {
         repository.deleteById(id)
     }
 }

@@ -21,7 +21,7 @@ class OrderItemViewModel(application: Application): AndroidViewModel(application
         all = repository.all.asLiveData()
     }
 
-    fun getById(id: Int, callback: (OrderItem?) -> Unit) = viewModelScope.launch {
+    fun getById(id: Long, callback: (OrderItem?) -> Unit) = viewModelScope.launch {
         callback(repository.getById(id))
     }
 
@@ -37,7 +37,7 @@ class OrderItemViewModel(application: Application): AndroidViewModel(application
         repository.delete(orderItem)
     }
 
-    fun deleteById(id: Int) = viewModelScope.launch {
+    fun deleteById(id: Long) = viewModelScope.launch {
         repository.deleteById(id)
     }
 }

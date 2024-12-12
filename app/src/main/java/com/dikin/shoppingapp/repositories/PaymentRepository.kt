@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 class PaymentRepository(private val dao: PaymentDao) {
     val all: Flow<List<Payment>> = dao.getAll()
 
-    suspend fun getById(id: Int): Payment? {
+    suspend fun getById(id: Long): Payment? {
         return dao.getById(id)
     }
 
@@ -23,7 +23,7 @@ class PaymentRepository(private val dao: PaymentDao) {
         dao.delete(payment)
     }
 
-    suspend fun deleteById(id: Int) {
+    suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
 }

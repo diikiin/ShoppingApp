@@ -17,10 +17,10 @@ import androidx.room.PrimaryKey
 )
 data class UserAddress(
     @PrimaryKey(autoGenerate = true)
-    val addressId: Int = 0,
-    val userId: Int,
-    val street: String,
-    val city: String,
-    val state: String,
-    val zipCode: String
+    val addressId: Long = 0,
+    val userId: Long,
+    val street: String?,
+    val city: String?,
+    val state: String?,
+    val zipCode: String?
 )

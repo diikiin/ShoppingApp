@@ -17,8 +17,8 @@ import androidx.room.PrimaryKey
 )
 data class Payment(
     @PrimaryKey(autoGenerate = true)
-    val paymentId: Int = 0,
-    val orderId: Int,
+    val paymentId: Long = 0,
+    val orderId: Long,
     val amount: Double,
     val paymentDate: String,
     val paymentMethod: String

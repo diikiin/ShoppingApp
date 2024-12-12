@@ -15,7 +15,7 @@ interface PaymentDao {
     fun getAll(): Flow<List<Payment>>
 
     @Query("select * from payments where paymentId = :id")
-    suspend fun getById(id: Int): Payment?
+    suspend fun getById(id: Long): Payment?
 
     @Insert
     suspend fun insert(payment: Payment)
@@ -27,5 +27,5 @@ interface PaymentDao {
     suspend fun delete(payment: Payment)
 
     @Query("delete from payments where paymentId = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

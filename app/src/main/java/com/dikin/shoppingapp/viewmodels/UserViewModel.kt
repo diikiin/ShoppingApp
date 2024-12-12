@@ -6,13 +6,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dikin.shoppingapp.config.AppDatabase
+import com.dikin.shoppingapp.entities.ShoppingCart
 import com.dikin.shoppingapp.entities.User
+import com.dikin.shoppingapp.repositories.ShoppingCartRepository
 import com.dikin.shoppingapp.repositories.UserRepository
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: UserRepository
+    private val cartRepository: ShoppingCartRepository
     val all: LiveData<List<User>>
     var currentUser: User? = null
 
@@ -20,9 +23,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         val dao = AppDatabase.getDatabase(application).userDao()
         repository = UserRepository(dao)
         all = repository.all.asLiveData()
+
+        val cartDao = AppDatabase.getDatabase(application).shoppingCartDao()
+        cartRepository = ShoppingCartRepository(cartDao)
     }
 
-    fun getById(id: Int, callback: (User?) -> Unit) = viewModelScope.launch {
+    fun getById(id: Long, callback: (User?) -> Unit) = viewModelScope.launch {
         callback(repository.getById(id))
     }
 
@@ -30,8 +36,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         return repository.getByUsername(username)
     }
 
-    fun create(user: User) = viewModelScope.launch {
-        repository.create(user)
+    fun create(user: User) {
+        val userId = repository.create(user)
+        cartRepository.create(ShoppingCart(userId = userId))
     }
 
     fun update(user: User) = viewModelScope.launch {
@@ -42,7 +49,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         repository.delete(user)
     }
 
-    fun deleteById(id: Int) = viewModelScope.launch {
+    fun deleteById(id: Long) = viewModelScope.launch {
         repository.deleteById(id)
     }
 }

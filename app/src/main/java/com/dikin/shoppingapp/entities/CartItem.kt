@@ -23,8 +23,8 @@ import androidx.room.PrimaryKey
 )
 data class CartItem(
     @PrimaryKey(autoGenerate = true)
-    val cartItemId: Int = 0,
-    val cartId: Int,
-    val productId: Int,
-    val quantity: Int
+    val cartItemId: Long = 0,
+    val cartId: Long,
+    val productId: Long,
+    val quantity: Long
 )

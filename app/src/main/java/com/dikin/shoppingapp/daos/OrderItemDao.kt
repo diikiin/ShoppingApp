@@ -15,7 +15,7 @@ interface OrderItemDao {
     fun getAll(): Flow<List<OrderItem>>
 
     @Query("select * from order_items where orderItemId= :id")
-    suspend fun getById(id: Int): OrderItem?
+    suspend fun getById(id: Long): OrderItem?
 
     @Insert
     suspend fun insert(orderItem: OrderItem)
@@ -27,5 +27,5 @@ interface OrderItemDao {
     suspend fun delete(orderItem: OrderItem)
 
     @Query("delete from order_items where orderItemId = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

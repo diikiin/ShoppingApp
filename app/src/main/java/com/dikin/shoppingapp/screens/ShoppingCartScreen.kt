@@ -47,7 +47,7 @@ fun ShoppingCartScreen(
         cartItems = cartItemViewModel.getByCartId(shoppingCart!!.cartId).value
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = modifier.fillMaxSize()) {
         if (cartItems.isNullOrEmpty()) {
             Text("Your Cart is Empty!")
         }
@@ -68,12 +68,12 @@ fun ShoppingCartScreen(
                             modifier = Modifier.weight(1f)
                         )
                         Text(
-                            text = "Qty: ${cartItem.quantity}",
+                            text = "Quantity: ${cartItem.quantity}",
                             style = MaterialTheme.typography.bodySmall
                         )
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(
-                            text = "$${cartItem.quantity * cartItem.productPrice}",
+                            text = "Price: $${cartItem.quantity * cartItem.productPrice}",
                             style = MaterialTheme.typography.bodyLarge
                         )
                     }

@@ -15,7 +15,7 @@ interface CartItemDao {
     fun getAll(): Flow<List<CartItem>>
 
     @Query("select * from cart_items where cartItemId = :id")
-    suspend fun getById(id: Int): CartItem?
+    suspend fun getById(id: Long): CartItem?
 
     @Query(
         """
@@ -27,7 +27,7 @@ interface CartItemDao {
         where ci.cartId = :cartId
     """
     )
-    fun getByCartId(cartId: Int): Flow<List<CartItemWithProduct>>
+    fun getByCartId(cartId: Long): Flow<List<CartItemWithProduct>>
 
     @Insert
     suspend fun insert(cartItem: CartItem)
@@ -39,5 +39,5 @@ interface CartItemDao {
     suspend fun delete(cartItem: CartItem)
 
     @Query("delete from cart_items where cartItemId = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

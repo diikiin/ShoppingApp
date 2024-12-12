@@ -17,10 +17,10 @@ import androidx.room.PrimaryKey
 )
 data class Product(
     @PrimaryKey(autoGenerate = true)
-    val productId: Int = 0,
+    val productId: Long = 0,
     val name: String,
-    val description: String,
+    val description: String?,
     val price: Double,
-    val imageUrl: String,
-    val categoryId: Int?
+    val imageUrl: String?,
+    val categoryId: Long?
 )

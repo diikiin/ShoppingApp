@@ -14,7 +14,7 @@ interface OrderDao {
     fun getAll(): Flow<List<Order>>
 
     @Query("select * from orders where orderId = :id")
-    suspend fun getById(id: Int): Order?
+    suspend fun getById(id: Long): Order?
 
     @Insert
     suspend fun insert(order: Order)
@@ -26,5 +26,5 @@ interface OrderDao {
     suspend fun delete(order: Order)
 
     @Query("delete from orders where orderId = :id")
-    suspend fun deleteById(id: Int)
+    suspend fun deleteById(id: Long)
 }

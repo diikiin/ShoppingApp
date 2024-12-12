@@ -22,11 +22,11 @@ class CartItemViewModel(application: Application) : AndroidViewModel(application
         all = repository.all.asLiveData()
     }
 
-    fun getById(id: Int, callback: (CartItem?) -> Unit) = viewModelScope.launch {
+    fun getById(id: Long, callback: (CartItem?) -> Unit) = viewModelScope.launch {
         callback(repository.getById(id))
     }
 
-    fun getByCartId(cartId: Int): LiveData<List<CartItemWithProduct>> {
+    fun getByCartId(cartId: Long): LiveData<List<CartItemWithProduct>> {
         return repository.getByCartId(cartId).asLiveData()
     }
 
@@ -42,7 +42,7 @@ class CartItemViewModel(application: Application) : AndroidViewModel(application
         repository.delete(cartItem)
     }
 
-    fun deleteById(id: Int) = viewModelScope.launch {
+    fun deleteById(id: Long) = viewModelScope.launch {
         repository.deleteById(id)
     }
 }

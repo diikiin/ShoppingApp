@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.dikin.shoppingapp.screens.ProductsCatalogScreen
+import com.dikin.shoppingapp.screens.products.ProductsCatalogScreen
 import com.dikin.shoppingapp.screens.ShoppingCartScreen
 import com.dikin.shoppingapp.screens.UserProfileScreen
 import com.dikin.shoppingapp.viewmodels.UserViewModel

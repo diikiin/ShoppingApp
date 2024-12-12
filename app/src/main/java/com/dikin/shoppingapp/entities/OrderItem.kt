@@ -23,9 +23,9 @@ import androidx.room.PrimaryKey
 )
 data class OrderItem(
     @PrimaryKey(autoGenerate = true)
-    val orderItemId: Int = 0,
-    val orderId: Int,
-    val productId: Int,
-    val quantity: Int,
+    val orderItemId: Long = 0,
+    val orderId: Long,
+    val productId: Long,
+    val quantity: Long,
     val price: Double
 )
