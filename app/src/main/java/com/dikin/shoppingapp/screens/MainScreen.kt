@@ -6,11 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
-import com.dikin.shoppingapp.entities.ShoppingCart
 import com.dikin.shoppingapp.entities.User
 import com.dikin.shoppingapp.navigation.BottomNavigationGraph
 import com.dikin.shoppingapp.navigation.BottomNavigationMenu
-import com.dikin.shoppingapp.viewmodels.ShoppingCartViewModel
 import com.dikin.shoppingapp.viewmodels.UserViewModel
 
 @Composable

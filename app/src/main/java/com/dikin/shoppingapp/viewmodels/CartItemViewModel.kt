@@ -16,6 +16,8 @@ class CartItemViewModel(application: Application) : AndroidViewModel(application
     private val repository: CartItemRepository
     val all: LiveData<List<CartItem>>
 
+    var currentCartItems: LiveData<List<CartItemWithProduct>>? = null
+
     init {
         val dao = AppDatabase.getDatabase(application).cartItemDao()
         repository = CartItemRepository(dao)
