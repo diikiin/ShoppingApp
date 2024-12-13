@@ -25,10 +25,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dikin.shoppingapp.DevParams
+import com.dikin.shoppingapp.R
 import com.dikin.shoppingapp.models.ProductWithCategory
 import com.dikin.shoppingapp.viewmodels.CartItemViewModel
 
@@ -56,6 +58,12 @@ fun ProductItem(
                 .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
+            Box {
+                if (product.imageUrl == null) {
+                    Icon(painterResource(R.drawable.products), contentDescription = "Default image")
+                }
+            }
+
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = product.name,

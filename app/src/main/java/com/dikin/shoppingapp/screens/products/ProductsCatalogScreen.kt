@@ -1,5 +1,6 @@
 package com.dikin.shoppingapp.screens.products
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dikin.shoppingapp.DevParams
+import com.dikin.shoppingapp.entities.Category
 import com.dikin.shoppingapp.models.ProductWithCategory
 import com.dikin.shoppingapp.viewmodels.CategoryViewModel
 import com.dikin.shoppingapp.viewmodels.ProductViewModel
@@ -35,10 +37,12 @@ fun ProductsCatalogScreen(
     modifier: Modifier = Modifier
 ) {
     val products by productViewModel.all.observeAsState(emptyList())
+    var showedProducts = products
     val categories by categoryViewModel.all.observeAsState(emptyList())
-    var selected by remember { mutableStateOf<ProductWithCategory?>(null) }
-    var showDialog by remember { mutableStateOf(false) }
+    var selectedProduct by remember { mutableStateOf<ProductWithCategory?>(null) }
+    var selectedCategory by remember { mutableStateOf<Category?>(null) }
 
+    var showDialog by remember { mutableStateOf(false) }
     var showAddCategoryDialog by remember { mutableStateOf(false) }
 
     Column(
@@ -57,7 +61,7 @@ fun ProductsCatalogScreen(
             Button(
                 onClick = {
                     showDialog = true
-                    selected = null
+                    selectedProduct = null
                 },
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
@@ -68,7 +72,7 @@ fun ProductsCatalogScreen(
             Button(
                 onClick = {
                     showAddCategoryDialog = true
-                    selected = null
+                    selectedProduct = null
                 },
                 modifier = Modifier.align(Alignment.CenterHorizontally)
             ) {
@@ -77,12 +81,29 @@ fun ProductsCatalogScreen(
             Spacer(modifier = Modifier.height(8.dp))
         }
 
+        Box(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            CategoryDropdown(
+                categories = categories,
+                selectedCategory = selectedCategory,
+                showUnselect = true,
+                onCategorySelected = { category ->
+                    selectedCategory = category
+                }
+            )
+        }
+
+        if (selectedCategory != null) {
+            showedProducts = products.filter { p -> p.categoryId == selectedCategory?.categoryId }
+        }
+
         LazyColumn {
-            items(products) { product ->
+            items(showedProducts) { product ->
                 ProductItem(
                     product = product,
                     onUpdate = {
-                        selected = it
+                        selectedProduct = it
                         showDialog = true
                     },
                     onDelete = {
@@ -95,7 +116,7 @@ fun ProductsCatalogScreen(
 
     if (showDialog) {
         AddOrUpdateProductDialog(
-            product = selected,
+            product = selectedProduct,
             categories = categories,
             onCreate = { product ->
                 productViewModel.create(product)

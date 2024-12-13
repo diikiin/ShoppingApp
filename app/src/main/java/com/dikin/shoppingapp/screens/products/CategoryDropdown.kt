@@ -1,6 +1,5 @@
 package com.dikin.shoppingapp.screens.products
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,7 +20,8 @@ import com.dikin.shoppingapp.entities.Category
 fun CategoryDropdown(
     categories: List<Category>,
     selectedCategory: Category?,
-    onCategorySelected: (Category) -> Unit
+    showUnselect: Boolean = false,
+    onCategorySelected: (Category?) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
 
@@ -46,6 +46,15 @@ fun CategoryDropdown(
             expanded = expanded,
             onDismissRequest = { expanded = false }
         ) {
+            if (showUnselect) {
+                DropdownMenuItem(
+                    onClick = {
+                        onCategorySelected(null)
+                        expanded = false
+                    },
+                    text = { Text("All") }
+                )
+            }
             categories.forEach { category ->
                 DropdownMenuItem(
                     onClick = {
