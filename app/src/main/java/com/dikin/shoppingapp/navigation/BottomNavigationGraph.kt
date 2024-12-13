@@ -14,20 +14,20 @@ import com.dikin.shoppingapp.viewmodels.UserViewModel
 fun BottomNavigationGraph(
     userViewModel: UserViewModel,
     navController: NavHostController,
-    paddingModifier: Modifier
+    modifier: Modifier
 ) {
     NavHost(
         navController = navController,
         startDestination = BottomNavDestination.Products.route
     ) {
         composable(route = BottomNavDestination.Products.route) {
-            ProductsCatalogScreen(userViewModel = userViewModel, modifier = paddingModifier)
+            ProductsCatalogScreen(userViewModel = userViewModel, modifier = modifier)
         }
         composable(route = BottomNavDestination.Cart.route) {
-            ShoppingCartScreen(userViewModel, modifier = paddingModifier)
+            ShoppingCartScreen(userViewModel = userViewModel, modifier = modifier)
         }
         composable(route = BottomNavDestination.Profile.route) {
-            UserProfileScreen(userViewModel)
+            UserProfileScreen(userViewModel = userViewModel, modifier = modifier)
         }
     }
 }

@@ -36,7 +36,7 @@ fun MainScreen() {
         BottomNavigationGraph(
             userViewModel = userViewModel,
             navController = navController,
-            paddingModifier = Modifier.padding(paddingValues)
+            modifier = Modifier.padding(paddingValues)
         )
     }
 }

@@ -25,8 +25,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dikin.shoppingapp.DevParams
 import com.dikin.shoppingapp.entities.Category
 import com.dikin.shoppingapp.models.ProductWithCategory
+import com.dikin.shoppingapp.viewmodels.CartItemViewModel
 import com.dikin.shoppingapp.viewmodels.CategoryViewModel
 import com.dikin.shoppingapp.viewmodels.ProductViewModel
+import com.dikin.shoppingapp.viewmodels.ShoppingCartViewModel
 import com.dikin.shoppingapp.viewmodels.UserViewModel
 
 @Composable
@@ -34,6 +36,8 @@ fun ProductsCatalogScreen(
     userViewModel: UserViewModel,
     productViewModel: ProductViewModel = viewModel(),
     categoryViewModel: CategoryViewModel = viewModel(),
+    cartItemViewModel: CartItemViewModel = viewModel(),
+    shoppingCartViewModel: ShoppingCartViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
     val products by productViewModel.all.observeAsState(emptyList())
@@ -101,6 +105,7 @@ fun ProductsCatalogScreen(
         LazyColumn {
             items(showedProducts) { product ->
                 ProductItem(
+                    userViewModel = userViewModel,
                     product = product,
                     onUpdate = {
                         selectedProduct = it

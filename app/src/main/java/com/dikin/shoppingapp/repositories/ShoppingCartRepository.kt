@@ -15,6 +15,10 @@ class ShoppingCartRepository(private val dao: ShoppingCartDao) {
         return dao.getByUserId(userId);
     }
 
+    fun getByUserIdCurrentThread(userId: Long): ShoppingCart? {
+        return dao.getByUserIdCurrentThread(userId)
+    }
+
     fun create(shoppingCart: ShoppingCart) {
         dao.insert(shoppingCart)
     }

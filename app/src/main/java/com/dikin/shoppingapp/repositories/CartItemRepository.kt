@@ -31,4 +31,8 @@ class CartItemRepository(private val dao: CartItemDao) {
     suspend fun deleteById(id: Long) {
         dao.deleteById(id)
     }
+
+    suspend fun clearCart(cartId: Long) {
+        dao.clearCart(cartId)
+    }
 }

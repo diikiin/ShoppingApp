@@ -33,15 +33,20 @@ import com.dikin.shoppingapp.DevParams
 import com.dikin.shoppingapp.R
 import com.dikin.shoppingapp.models.ProductWithCategory
 import com.dikin.shoppingapp.viewmodels.CartItemViewModel
+import com.dikin.shoppingapp.viewmodels.ShoppingCartViewModel
+import com.dikin.shoppingapp.viewmodels.UserViewModel
 
 @Composable
 fun ProductItem(
     product: ProductWithCategory,
     onUpdate: (ProductWithCategory) -> Unit,
     onDelete: (ProductWithCategory) -> Unit,
+    userViewModel: UserViewModel,
+    shoppingCartViewModel: ShoppingCartViewModel = viewModel(),
     cartItemViewModel: CartItemViewModel = viewModel()
 ) {
     var showDialog by remember { mutableStateOf(false) }
+    var showAddToCartDialog by remember { mutableStateOf(false) }
     var expanded by remember { mutableStateOf(false) }
 
     Card(
@@ -72,8 +77,8 @@ fun ProductItem(
                 )
             }
 
-            Box {
-                if (DevParams.debug) {
+            if (DevParams.debug) {
+                Box {
                     IconButton(onClick = { expanded = true }) {
                         Icon(Icons.Default.MoreVert, contentDescription = "Settings")
                     }
@@ -97,12 +102,14 @@ fun ProductItem(
                             text = { Text("Delete") }
                         )
                     }
-                } else {
-                    IconButton(onClick = {
+                }
+            }
 
-                    }) {
-                        Icon(Icons.Default.Add, contentDescription = "Add")
-                    }
+            Box {
+                IconButton(onClick = {
+                    showAddToCartDialog = true
+                }) {
+                    Icon(Icons.Default.Add, contentDescription = "Add")
                 }
             }
         }
@@ -110,5 +117,23 @@ fun ProductItem(
 
     if (showDialog) {
         ProductDetailDialog(product = product, onDismiss = { showDialog = false })
+    }
+
+    if (showAddToCartDialog) {
+        ProductAddToCart(
+            product = product,
+            onAddToCart = { cartProduct, quantity ->
+                shoppingCartViewModel.getByUserId(userViewModel.currentUser!!.userId) { result ->
+                    result?.let {
+                        cartItemViewModel.create(
+                            product = cartProduct,
+                            cartId = it.cartId,
+                            quantity = quantity
+                        )
+                    }
+                }
+                showAddToCartDialog = false
+            },
+            onDismiss = { showAddToCartDialog = false })
     }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.dikin.shoppingapp.config.AppDatabase
 import com.dikin.shoppingapp.entities.CartItem
 import com.dikin.shoppingapp.models.CartItemWithProduct
+import com.dikin.shoppingapp.models.ProductWithCategory
 import com.dikin.shoppingapp.repositories.CartItemRepository
 import kotlinx.coroutines.launch
 
@@ -15,8 +16,6 @@ class CartItemViewModel(application: Application) : AndroidViewModel(application
 
     private val repository: CartItemRepository
     val all: LiveData<List<CartItem>>
-
-    var currentCartItems: LiveData<List<CartItemWithProduct>>? = null
 
     init {
         val dao = AppDatabase.getDatabase(application).cartItemDao()
@@ -32,8 +31,14 @@ class CartItemViewModel(application: Application) : AndroidViewModel(application
         return repository.getByCartId(cartId).asLiveData()
     }
 
-    fun create(cartItem: CartItem) = viewModelScope.launch {
-        repository.create(cartItem)
+    fun create(product: ProductWithCategory, cartId: Long, quantity: Long) = viewModelScope.launch {
+        repository.create(
+            CartItem(
+                cartId = cartId,
+                productId = product.productId,
+                quantity = quantity
+            )
+        )
     }
 
     fun update(cartItem: CartItem) = viewModelScope.launch {
@@ -46,5 +51,9 @@ class CartItemViewModel(application: Application) : AndroidViewModel(application
 
     fun deleteById(id: Long) = viewModelScope.launch {
         repository.deleteById(id)
+    }
+
+    fun clearCart(cartId: Long) = viewModelScope.launch {
+        repository.clearCart(cartId)
     }
 }
