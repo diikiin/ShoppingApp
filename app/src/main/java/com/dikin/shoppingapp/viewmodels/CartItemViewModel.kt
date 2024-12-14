@@ -15,12 +15,10 @@ import kotlinx.coroutines.launch
 class CartItemViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: CartItemRepository
-    val all: LiveData<List<CartItem>>
 
     init {
         val dao = AppDatabase.getDatabase(application).cartItemDao()
         repository = CartItemRepository(dao)
-        all = repository.all.asLiveData()
     }
 
     fun getById(id: Long, callback: (CartItem?) -> Unit) = viewModelScope.launch {

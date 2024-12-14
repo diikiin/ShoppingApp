@@ -2,8 +2,6 @@ package com.dikin.shoppingapp.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dikin.shoppingapp.config.AppDatabase
 import com.dikin.shoppingapp.entities.Payment
@@ -13,12 +11,10 @@ import kotlinx.coroutines.launch
 class PaymentViewModel(application: Application): AndroidViewModel(application) {
 
     private val repository: PaymentRepository
-    val all: LiveData<List<Payment>>
 
     init {
         val dao = AppDatabase.getDatabase(application).paymentDao()
         repository = PaymentRepository(dao)
-        all = repository.all.asLiveData()
     }
 
     fun getById(id: Long, callback: (Payment?) -> Unit) = viewModelScope.launch {

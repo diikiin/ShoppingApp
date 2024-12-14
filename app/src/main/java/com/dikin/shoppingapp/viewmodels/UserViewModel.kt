@@ -2,8 +2,6 @@ package com.dikin.shoppingapp.viewmodels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dikin.shoppingapp.config.AppDatabase
 import com.dikin.shoppingapp.entities.ShoppingCart
@@ -16,13 +14,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: UserRepository
     private val cartRepository: ShoppingCartRepository
-    val all: LiveData<List<User>>
     var currentUser: User? = null
 
     init {
         val dao = AppDatabase.getDatabase(application).userDao()
         repository = UserRepository(dao)
-        all = repository.all.asLiveData()
 
         val cartDao = AppDatabase.getDatabase(application).shoppingCartDao()
         cartRepository = ShoppingCartRepository(cartDao)
