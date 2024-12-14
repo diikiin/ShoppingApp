@@ -1,17 +1,25 @@
 package com.dikin.shoppingapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.dikin.shoppingapp.screens.Greeting
 import com.dikin.shoppingapp.screens.MainScreen
+import com.dikin.shoppingapp.screens.Sum
 import com.dikin.shoppingapp.ui.theme.ShoppingAppTheme
 
 class MainActivity : ComponentActivity() {
+
+    val LIFECYCLE_TAG = "Activity Lifecycle"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,55 +41,36 @@ class MainActivity : ComponentActivity() {
                 MainScreen()
             }
         }
+        Log.i(LIFECYCLE_TAG, "onCreate")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.i(LIFECYCLE_TAG, "onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.i(LIFECYCLE_TAG, "onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.i(LIFECYCLE_TAG, "onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.i(LIFECYCLE_TAG, "onStop")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i(LIFECYCLE_TAG, "onRestart")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i(LIFECYCLE_TAG, "onDestroy")
     }
 }
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Composable
-fun Sum(modifier: Modifier = Modifier) {
-    val add: (Int, Int) -> Int = { a, b -> a + b }
-    val sum = add(10, 33)
-
-    val square: (Int) -> Int = { it * it }
-    val squareOfInt = square(5)
-
-    Text(
-        text = "Sum of integers: $sum\nSquare of 5: $squareOfInt",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ShoppingAppTheme {
-        Greeting("Android")
-    }
-}
-
-//@Composable
-//fun MainApp() {
-//    val navController = rememberNavController()
-//    val user =
-//        remember { User(username = "amigo", email = "amigo@email.com", passwordHash = "hash") }
-//    val application = LocalContext.current.applicationContext as Application
-//
-//    NavHost(navController = navController, startDestination = "productsCatalog") {
-//        composable("productsCatalog") {
-//
-//        }
-//        composable("shoppingCart") {
-//            ShoppingCartScreen(userId = user.userId)
-//        }
-//        composable("userProfileScreen") {
-//            UserProfileScreen(user)
-//        }
-//    }
-//}
