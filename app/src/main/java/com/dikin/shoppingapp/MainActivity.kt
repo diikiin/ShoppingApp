@@ -5,15 +5,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
-import com.dikin.shoppingapp.screens.Greeting
 import com.dikin.shoppingapp.screens.MainScreen
-import com.dikin.shoppingapp.screens.Sum
 import com.dikin.shoppingapp.ui.theme.ShoppingAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,19 +17,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ShoppingAppTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    Column(modifier = Modifier.padding(innerPadding)) {
-//                        Greeting(
-//                            name = "World!",
-//                            modifier = Modifier
-//                                .fillMaxWidth()
-//                        )
-//                        Sum(
-//                            modifier = Modifier
-//                                .fillMaxWidth()
-//                        )
-//                    }
-//                }
                 MainScreen()
             }
         }
