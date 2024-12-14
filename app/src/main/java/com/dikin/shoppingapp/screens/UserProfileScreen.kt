@@ -41,5 +41,4 @@ fun UserProfileScreen(
             Text(text = "Email: ${user.email}", style = MaterialTheme.typography.titleLarge)
         }
     }
-
 }

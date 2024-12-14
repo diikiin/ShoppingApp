@@ -28,8 +28,8 @@ import com.dikin.shoppingapp.viewmodels.UserViewModel
 @Composable
 fun ShoppingCartScreen(
     userViewModel: UserViewModel,
-    shoppingCartViewModel: ShoppingCartViewModel = viewModel(),
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    shoppingCartViewModel: ShoppingCartViewModel = viewModel()
 ) {
     val user = userViewModel.currentUser!!
     val shoppingCart = shoppingCartViewModel.getByUserIdWithItems(user.userId)
