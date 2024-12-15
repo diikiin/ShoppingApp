@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -20,8 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.dikin.shoppingapp.DevParams
 import com.dikin.shoppingapp.entities.Category
 import com.dikin.shoppingapp.models.ProductWithCategory
@@ -31,6 +32,7 @@ import com.dikin.shoppingapp.viewmodels.UserViewModel
 
 @Composable
 fun ProductsCatalogScreen(
+    navController: NavController,
     userViewModel: UserViewModel,
     modifier: Modifier = Modifier,
     productViewModel: ProductViewModel = viewModel(),
@@ -50,10 +52,9 @@ fun ProductsCatalogScreen(
     ) {
         Text(
             text = "Products Catalog",
-            fontSize = 32.sp,
+            style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .padding(8.dp)
                 .fillMaxWidth()
         )
 
@@ -101,6 +102,7 @@ fun ProductsCatalogScreen(
         LazyColumn {
             items(showedProducts) { product ->
                 ProductItem(
+                    navController = navController,
                     userViewModel = userViewModel,
                     product = product,
                     onUpdate = {

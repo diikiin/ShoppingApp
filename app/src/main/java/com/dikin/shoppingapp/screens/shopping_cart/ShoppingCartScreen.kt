@@ -20,7 +20,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dikin.shoppingapp.viewmodels.ShoppingCartViewModel
 import com.dikin.shoppingapp.viewmodels.UserViewModel
@@ -41,10 +40,9 @@ fun ShoppingCartScreen(
     ) {
         Text(
             text = "Shopping Cart",
-            fontSize = 32.sp,
+            style = MaterialTheme.typography.headlineLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier
-                .padding(8.dp)
                 .fillMaxWidth()
         )
         Spacer(Modifier.height(16.dp))

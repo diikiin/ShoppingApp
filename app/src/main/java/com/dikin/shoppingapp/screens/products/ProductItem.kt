@@ -29,6 +29,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.dikin.shoppingapp.DevParams
 import com.dikin.shoppingapp.R
 import com.dikin.shoppingapp.models.ProductWithCategory
@@ -38,6 +39,7 @@ import com.dikin.shoppingapp.viewmodels.UserViewModel
 
 @Composable
 fun ProductItem(
+    navController: NavController,
     product: ProductWithCategory,
     onUpdate: (ProductWithCategory) -> Unit,
     onDelete: (ProductWithCategory) -> Unit,
@@ -116,7 +118,11 @@ fun ProductItem(
     }
 
     if (showDialog) {
-        ProductDetailDialog(product = product, onDismiss = { showDialog = false })
+        ProductDetailDialog(
+            product = product,
+            onDismiss = { showDialog = false },
+            onNavigateToComments = { navController.navigate("commentsSection") }
+        )
     }
 
     if (showAddToCartDialog) {

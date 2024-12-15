@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.dikin.shoppingapp.screens.UserProfileScreen
+import com.dikin.shoppingapp.screens.comments.CommentsSection
 import com.dikin.shoppingapp.screens.products.ProductsCatalogScreen
 import com.dikin.shoppingapp.screens.shopping_cart.ShoppingCartScreen
 import com.dikin.shoppingapp.viewmodels.UserViewModel
@@ -21,13 +22,20 @@ fun BottomNavigationGraph(
         startDestination = BottomNavDestination.Products.route
     ) {
         composable(route = BottomNavDestination.Products.route) {
-            ProductsCatalogScreen(userViewModel = userViewModel, modifier = modifier)
+            ProductsCatalogScreen(
+                navController = navController,
+                userViewModel = userViewModel,
+                modifier = modifier
+            )
         }
         composable(route = BottomNavDestination.Cart.route) {
             ShoppingCartScreen(userViewModel = userViewModel, modifier = modifier)
         }
         composable(route = BottomNavDestination.Profile.route) {
             UserProfileScreen(userViewModel = userViewModel, modifier = modifier)
+        }
+        composable(route = "commentsSection") {
+            CommentsSection(modifier = modifier)
         }
     }
 }
